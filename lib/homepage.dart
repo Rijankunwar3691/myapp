@@ -95,11 +95,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(130, 30, 0, 0),
+              const SizedBox(height: 10),
+              Center(
                 child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.blue)),
                   onPressed: null,
-                  style: ElevatedButton.styleFrom(primary: Colors.red),
                   child: Text('Login'),
                 ),
               ),
