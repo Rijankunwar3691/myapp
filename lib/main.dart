@@ -52,9 +52,10 @@ class _QuizzAppState extends State<QuizzApp> {
             child: Column(
               children: [
                 Question(questions[Questionsindex]['questiontext'] as String),
-                Answer(AnswerSelected),
-                Answer(AnswerSelected),
-                Answer(AnswerSelected),
+                ...(questions[Questionsindex]['answer'] as List<String>)
+                    .map((answer) {
+                  return Answer(AnswerSelected, answer);
+                }).toList(),
               ],
             ),
           ),
