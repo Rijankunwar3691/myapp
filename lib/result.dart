@@ -6,11 +6,11 @@ class Result extends StatelessWidget {
   Result(this.totalscore, this.resethandler);
   String get resultphrase {
     String resulttext;
-    if (totalscore <= 5) {
+    if (totalscore <= 10) {
       resulttext = 'You are innocent and awsome';
-    } else if (totalscore <= 10) {
+    } else if (totalscore <= 14) {
       resulttext = 'Good choice';
-    } else if (totalscore <= 15) {
+    } else if (totalscore <= 16) {
       resulttext = 'Not bad';
     } else {
       resulttext = 'Bad choice';
@@ -22,6 +22,7 @@ class Result extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             resultphrase,
