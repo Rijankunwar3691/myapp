@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './answer.dart';
 import './Questions.dart';
+import './result.dart';
 
 void main() {
   runApp(const MaterialApp(home: QuizzApp()));
@@ -17,7 +18,12 @@ class _QuizzAppState extends State<QuizzApp> {
   var questions = [
     {
       'questiontext': 'What is your favourite animal ?',
-      'answer': ['Tiger', 'Cat', 'Dog', 'Lion']
+      'answer': [
+        {'text': 'Tiger', 'score': 5},
+        {'text': 'Cat', 'score': 4},
+        {'text': 'Dog', 'score': 3},
+        {'text': 'Lion', 'score': 2},
+      ]
     },
     {
       'questiontext': 'what is your favourite colour ?',
@@ -32,10 +38,13 @@ class _QuizzAppState extends State<QuizzApp> {
       'answer': ['Swimming', 'Singing', 'Dancing', 'Acting']
     },
   ];
-  var Questionsindex = 0;
-  void AnswerSelected() {
+  var questionsindex = 0;
+  var totalscore = 0;
+
+  void answerSelected(int score) {
+    totalscore += score;
     setState(() {
-      Questionsindex++;
+      questionsindex++;
     });
   }
 
@@ -49,15 +58,21 @@ class _QuizzAppState extends State<QuizzApp> {
         body: Container(
           color: Colors.grey,
           child: Center(
-            child: Column(
-              children: [
-                Question(questions[Questionsindex]['questiontext'] as String),
-                ...(questions[Questionsindex]['answer'] as List<String>)
-                    .map((answer) {
-                  return Answer(AnswerSelected, answer);
-                }).toList(),
-              ],
-            ),
+            child: questionsindex < questions.length
+                ? Column(
+                    children: [
+                      Question(
+                          questions[questionsindex]['questiontext'] as String),
+                      ...(questions[questionsindex]['answer']
+                              as List<Map<String, Object>>)
+                          .map((answer) {
+                        return Answer(
+                            () => answerSelected(answer['score'] as int),
+                            answer['text'] as String);
+                      }).toList(),
+                    ],
+                  )
+                : Result(totalscore),
           ),
         ));
   }
