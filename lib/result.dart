@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class Result extends StatelessWidget {
   final int totalscore;
-  Result(this.totalscore);
+  final VoidCallback resethandler;
+  Result(this.totalscore, this.resethandler);
   String get resultphrase {
     String resulttext;
     if (totalscore <= 5) {
@@ -20,10 +21,15 @@ class Result extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(
-        resultphrase,
-        style: const TextStyle(
-            fontWeight: FontWeight.bold, fontSize: 30, color: Colors.amber),
+      child: Column(
+        children: [
+          Text(
+            resultphrase,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 30, color: Colors.amber),
+          ),
+          ElevatedButton(onPressed: resethandler, child: Text('Play Again'))
+        ],
       ),
     );
   }

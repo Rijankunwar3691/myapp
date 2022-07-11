@@ -27,15 +27,30 @@ class _QuizzAppState extends State<QuizzApp> {
     },
     {
       'questiontext': 'what is your favourite colour ?',
-      'answer': ['Red', 'Black', 'White', 'Blue']
+      'answer': [
+        {'text': 'Red', 'score': 5},
+        {'text': 'Black', 'score': 4},
+        {'text': 'White', 'score': 3},
+        {'text': 'Blue', 'score': 2},
+      ]
     },
     {
       'questiontext': 'What is your favourite sport ?',
-      'answer': ['Football', 'Cricket', 'Golf', 'Hockey']
+      'answer': [
+        {'text': 'Football', 'score': 5},
+        {'text': 'Cricket', 'score': 5},
+        {'text': 'Golf', 'score': 5},
+        {'text': 'Hockey', 'score': 5}
+      ]
     },
     {
       'questiontext': 'What is your hobby ?',
-      'answer': ['Swimming', 'Singing', 'Dancing', 'Acting']
+      'answer': [
+        {'text': 'Swimming', 'score': 5},
+        {'text': 'Singing', 'score': 4},
+        {'text': 'Dancing', 'score': 3},
+        {'text': 'Acting', 'score': 2}
+      ]
     },
   ];
   var questionsindex = 0;
@@ -45,6 +60,13 @@ class _QuizzAppState extends State<QuizzApp> {
     totalscore += score;
     setState(() {
       questionsindex++;
+    });
+  }
+
+  void reset() {
+    setState(() {
+      questionsindex = 0;
+      totalscore = 0;
     });
   }
 
@@ -72,7 +94,7 @@ class _QuizzAppState extends State<QuizzApp> {
                       }).toList(),
                     ],
                   )
-                : Result(totalscore),
+                : Result(totalscore, reset),
           ),
         ));
   }
